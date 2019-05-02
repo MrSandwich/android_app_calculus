@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.test.calculus.Fragments.BlankFragment;
-import com.test.calculus.Fragments.OverzichtFragment;
+import com.test.calculus.Fragments.SettingsFragment;
+import com.test.calculus.Fragments.ScoreFragment;
 import com.test.calculus.Fragments.StartFragment;
 
 
@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity{
                     selectedFragment = new StartFragment();
                     break;
                 case R.id.nav_dashboard:
-                    selectedFragment = new OverzichtFragment();
+                    selectedFragment = new ScoreFragment();
                     break;
                 case R.id.nav_notifications:
-                    selectedFragment = new BlankFragment();
+                    selectedFragment = new SettingsFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();

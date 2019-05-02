@@ -6,5 +6,9 @@
     android:backgroundTint="#CCFFFFFF"
     android:backgroundTintMode="src_over">
 
+    <ListView
+        android:id="@+id/scorelijst"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
