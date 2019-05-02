@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/optie1"
+        android:title="Tafels oefenen"
+        />
+    <item
+        android:id="@+id/optie2"
+        android:title="Keersommen oefenen"
+        
+        />
+    <item
+        android:id="@+id/optie3"
+        android:title="Rekensommen oefenen"
+        />
+
+</menu>
