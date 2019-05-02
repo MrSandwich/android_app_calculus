@@ -12,10 +12,7 @@
         android:paddingRight="16dp"
         android:paddingTop="20dp"
         android:text=" DEZE TEXT LEES IK TERUG "
-        android:textSize="25dp"
-        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-
         />
 
     <TextView
