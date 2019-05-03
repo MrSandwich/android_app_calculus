@@ -9,17 +9,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import com.test.calculus.R;
-import com.test.calculus.Models.CourseModel;
-
-import static java.security.AccessController.getContext;
+import com.test.calculus.Models.scoreModel;
 
 /**
  * Created by mjboere on 28-11-2017.
  * 1 element van de lijst
  */
-public class CourseListAdapter extends ArrayAdapter<CourseModel> {
-    public CourseListAdapter(Context context, int resource, List<CourseModel> objects){
+public class CourseListAdapter extends ArrayAdapter<scoreModel> {
+    public CourseListAdapter(Context context, int resource, List<scoreModel> objects){
         super(context, resource, objects);
     }
 
@@ -39,7 +36,7 @@ public class CourseListAdapter extends ArrayAdapter<CourseModel> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        CourseModel cm = getItem(position);
+        scoreModel cm = getItem(position);
 
         // Uit de Array model informatie ophalen
         vh.naam.setText((CharSequence) cm.getNaam());

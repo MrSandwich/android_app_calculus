@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.test.calculus.MediaControl;
@@ -32,6 +31,7 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
     private int antwoord;
     private int beantwoordeVragen;
     private boolean isRandom;
+    private int vragenCorrect;
 
     private Button antwoordknop1;
     private Button antwoordknop2;
@@ -42,7 +42,7 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_tafel_oef, container, false);
+        v = inflater.inflate(R.layout.fragment_oefeningen, container, false);
         countdownMusic = new MediaControl(getContext(), R.raw.countdown_5, false);
         bongMusic = new MediaControl(getContext(), R.raw.bong, false);
 
@@ -107,6 +107,15 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
             getoondeSom.setTextSize(40);
             getoondeSom.setText("Super, alle vragen beantwoord!");
 
+            //
+            Context context = getActivity();
+            SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("vragenCorrect", vragenCorrect);
+            editor.commit();
+
+
+            // Wacht 2,5 seconden en toon vervolgens het fragment waar het een visualisatie van de score getoont wordt
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -224,20 +233,33 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
     }
     public void onClick(View v){
         switch (v.getId()){
+
+            // controleer of de gebruiker de correcte knop gekozen heeft en zo ja, tel een punt op bij de score
             case R.id.antKnop1:
+                if (Integer.parseInt(antwoordknop1.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop2:
+                if (Integer.parseInt(antwoordknop2.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop3:
+                if (Integer.parseInt(antwoordknop3.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop4:
-
+                if (Integer.parseInt(antwoordknop4.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
         }
@@ -295,7 +317,7 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
 
                 startVolgendeVraag(beantwoordeVragen++);
             }
-        }, 5500);
+        }, 4000);
     }
     public void onderbreekSpel(){
 

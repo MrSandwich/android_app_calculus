@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.test.calculus.CourseListAdapter;
-import com.test.calculus.Models.CourseModel;
+import com.test.calculus.Models.scoreModel;
 import com.test.calculus.R;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ScoreFragment extends Fragment {
     private View v;
     private ListView scorelijst;
     private CourseListAdapter mAdapter;
-    private List<CourseModel> courseModels = new ArrayList<>();
+    private List<scoreModel> scoreModels = new ArrayList<>();
 
     @Nullable
     @Override
@@ -30,15 +30,15 @@ public class ScoreFragment extends Fragment {
 
         scorelijst = v.findViewById(R.id.scorelijst);
 
-        courseModels.add(new CourseModel("Lucy", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Tom", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Harry", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Kees", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Tamara", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Demi", "random oefening", "Baby Blue"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Lucy", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Tom", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Harry", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Kees", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Tamara", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Demi", "random oefening", "Baby Blue"));             // DUMMY DATA
+        scoreModels.add(new scoreModel("Ford", "Thunderbird", "Baby Blue"));             // DUMMY DATA
 
-        mAdapter = new CourseListAdapter(getContext(), 0, courseModels);
+        mAdapter = new CourseListAdapter(getContext(), 0, scoreModels);
         scorelijst.setAdapter(mAdapter);
 
         return v;

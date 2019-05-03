@@ -24,12 +24,17 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
 
     public static final String PREFS_NAME = "GedeeldeGegevens";
     final Handler handler = new Handler();
+
     MediaControl countdownMusic;
     MediaControl bongMusic;
+
     private View v;
+
     private int getal1;
     private int getal2;
+
     private int beantwoordeVragen;
+    private int vragenCorrect;
     private int antwoord;
 
     private Button antwoordknop1;
@@ -41,7 +46,7 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_random_oef, container, false);
+        v = inflater.inflate(R.layout.fragment_oefeningen, container, false);
         countdownMusic = new MediaControl(getContext(), R.raw.countdown_5, false);
         bongMusic = new MediaControl(getContext(), R.raw.bong, false);
 
@@ -104,6 +109,15 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
             getoondeSom.setTextSize(40);
             getoondeSom.setText("Super, alle vragen beantwoord!");
 
+            //
+            Context context = getActivity();
+            SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("vragenCorrect", vragenCorrect);
+            editor.commit();
+
+
+            // Wacht 2,5 seconden en toon vervolgens het fragment waar het een visualisatie van de score getoont wordt
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -209,20 +223,33 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
     }
     public void onClick(View v){
         switch (v.getId()){
+
+            // controleer of de gebruiker de correcte knop gekozen heeft en zo ja, tel een punt op bij de score
             case R.id.antKnop1:
+                if (Integer.parseInt(antwoordknop1.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop2:
+                if (Integer.parseInt(antwoordknop2.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop3:
+                if (Integer.parseInt(antwoordknop3.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
 
             case R.id.antKnop4:
-
+                if (Integer.parseInt(antwoordknop4.getText().toString()) == (antwoord)){
+                    vragenCorrect++;
+                }
                 toonFeedback();
                 break;
         }
@@ -240,7 +267,6 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
         if (Integer.parseInt(antwoordknop1.getText().toString()) == (antwoord)){
 
             antwoordknop1.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#00b20b")));
-            antwoordknop1.setTextColor(Color.parseColor("#000000"));
             antwoordknop2.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#d11f00")));
             antwoordknop3.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#d11f00")));
             antwoordknop4.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#d11f00")));
@@ -279,7 +305,7 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
 
                 startVolgendeVraag(beantwoordeVragen++);
             }
-        }, 5500);
+        }, 4000);
     }
     public void onderbreekSpel(){
 

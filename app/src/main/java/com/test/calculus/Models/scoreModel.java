@@ -3,14 +3,14 @@ package com.test.calculus.Models;
 /**
  * Created by mjboere on 28-11-2017.
  */
-public class CourseModel {
+public class scoreModel {
 
     private String naam;
     private String soortOef;
     private String score;
 
 
-    public CourseModel(String naam, String soortOef, String score) {
+    public scoreModel(String naam, String soortOef, String score) {
         this.naam = naam;
         this.soortOef = soortOef;
         this.score = score;

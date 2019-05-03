@@ -95,7 +95,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                     editor.commit();
 
                     //Transitie starten naar het tafel oefenen
-                    //lobbymusic.stop();
+                    lobbymusic.stop();
                     getFragmentManager().beginTransaction().replace(R.id.frame_container, new TafelOefFragment()).commit();
 
                 }
