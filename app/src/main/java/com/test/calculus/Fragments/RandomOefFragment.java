@@ -76,8 +76,8 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
 
     public void startVolgendeVraag (int beantwoordeVragen){
 
-        //Controleer het aantal beantwoorde vragen
-        if (beantwoordeVragen < 9){
+        // Controleer het aantal beantwoorde vragen
+        if (beantwoordeVragen < 1){
 
             countdownMusic.start();
 
@@ -96,11 +96,20 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
                 }
             }, 5000);
         }
+        // Het spel stopt, feliciteer de gebruiker en start het fragment met de score
         else {
-            // hier code of een link naar een methode die het spel stopt.
-            TextView getoondeSom = v.findViewById(R.id.getoondeSom);
-            getoondeSom.setText("EINDE SPEL");
+
             countdownMusic.stop();
+            TextView getoondeSom = v.findViewById(R.id.getoondeSom);
+            getoondeSom.setTextSize(40);
+            getoondeSom.setText("Super, alle vragen beantwoord!");
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container, new OverzichtFragment()).commit();
+                }
+            }, 2500);
         }
     }
 
@@ -275,8 +284,8 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
     public void onderbreekSpel(){
 
         TextView getoondeSom = v.findViewById(R.id.getoondeSom);
-        getoondeSom.setTextSize(50);
-        getoondeSom.setText("Spel onderbroken");
+        getoondeSom.setTextSize(40);
+        getoondeSom.setText("Spel onderbroken, keer terug naar het startscherm");
 
     }
 }

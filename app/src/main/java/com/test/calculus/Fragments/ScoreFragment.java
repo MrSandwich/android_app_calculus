@@ -30,20 +30,14 @@ public class ScoreFragment extends Fragment {
 
         scorelijst = v.findViewById(R.id.scorelijst);
 
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
-        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue", "1967"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Lucy", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Tom", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Harry", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Kees", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Tamara", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Demi", "random oefening", "Baby Blue"));             // DUMMY DATA
+        courseModels.add(new CourseModel("Ford", "Thunderbird", "Baby Blue"));             // DUMMY DATA
+
         mAdapter = new CourseListAdapter(getContext(), 0, courseModels);
         scorelijst.setAdapter(mAdapter);
 

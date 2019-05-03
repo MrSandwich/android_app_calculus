@@ -31,9 +31,9 @@ public class CourseListAdapter extends ArrayAdapter<CourseModel> {
             vh = new ViewHolder();
             LayoutInflater li = LayoutInflater.from(getContext());
             convertView = li.inflate(R.layout.row, parent, false);
-            vh.name = (TextView) convertView.findViewById(R.id.naam);
-            vh.model = (TextView) convertView.findViewById(R.id.score);
-            //vh.kleur = (TextView) convertView.findViewById(R.id.subject_kleur);
+            vh.naam = (TextView) convertView.findViewById(R.id.naam);
+            vh.soortOef = (TextView) convertView.findViewById(R.id.soortOefening);
+            vh.score = (TextView) convertView.findViewById(R.id.score);
             //vh.bouwjaar = (TextView) convertView.findViewById(R.id.subject_bouwjaar);
             convertView.setTag(vh);
         } else {
@@ -42,17 +42,15 @@ public class CourseListAdapter extends ArrayAdapter<CourseModel> {
         CourseModel cm = getItem(position);
 
         // Uit de Array model informatie ophalen
-        vh.name.setText((CharSequence) cm.getMerk());
-        vh.model.setText((CharSequence) cm.getModel());
-        //vh.kleur.setText((CharSequence) cm.getKleur());
-        //vh.bouwjaar.setText((CharSequence) cm.getBouwjaar());
+        vh.naam.setText((CharSequence) cm.getNaam());
+        vh.soortOef.setText((CharSequence) cm.getSoortOef());
+        vh.score.setText((CharSequence) cm.getScore());
         return convertView;
     }
 
     private static class ViewHolder {
-        TextView name;
-        TextView model;
-        TextView kleur;
-        TextView bouwjaar;
+        TextView naam;
+        TextView soortOef;
+        TextView score;
     }
 }

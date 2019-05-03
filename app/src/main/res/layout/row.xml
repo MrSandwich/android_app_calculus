@@ -27,6 +27,7 @@
         android:paddingBottom="10dp"
         android:layout_below="@+id/naam"
         android:text=" EN DEZE TEXT OOK "
+        android:textSize="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
     <TextView
@@ -40,6 +41,8 @@
         android:paddingBottom="10dp"
         android:layout_below="@+id/naam"
         android:text=" EN DEZE TEXT OOK "
+        android:textSize="20dp"
+
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 </RelativeLayout>

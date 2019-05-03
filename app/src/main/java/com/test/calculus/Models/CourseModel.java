@@ -5,31 +5,23 @@ package com.test.calculus.Models;
  */
 public class CourseModel {
 
-    private String merk;
-    private String model;
-    private String kleur;
-    private String bouwjaar;
+    private String naam;
+    private String soortOef;
+    private String score;
 
-    public CourseModel(String merk, String model, String kleur, String bouwjaar) {
-        this.merk = merk;
-        this.model = model;
-        this.kleur = kleur;
-        this.bouwjaar = bouwjaar;
-    }
 
-    public String getMerk(){
-        return merk;
+    public CourseModel(String naam, String soortOef, String score) {
+        this.naam = naam;
+        this.soortOef = soortOef;
+        this.score = score;
     }
 
-    public String getModel(){
-        return model;
+    public String getNaam(){
+        return naam;
     }
-    public String getKleur(){
-        return kleur;
-    }
-    public String getBouwjaar(){
-        return bouwjaar;
-    }
+    public String getSoortOef(){ return soortOef; }
+    public String getScore(){ return score; }
+
 
     // ADD GETTERS AND SETTERS - ONLY IF NEEDED !!}
 }
