@@ -102,16 +102,18 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
         }
         // Het spel stopt, feliciteer de gebruiker en start het fragment met de score
         else{
+            // toon feedback aan de gebruiker
             countdownMusic.stop();
             TextView getoondeSom = v.findViewById(R.id.getoondeSom);
             getoondeSom.setTextSize(40);
             getoondeSom.setText("Super, alle vragen beantwoord!");
 
-            //
+            // value passing van de score en de soort oefening
             Context context = getActivity();
             SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt("vragenCorrect", vragenCorrect);
+            editor.putString("soortOefening", "De tafel van: "+ tafelnummer);
             editor.commit();
 
 

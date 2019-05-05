@@ -51,6 +51,7 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
     private Button uploadKnop;
     private EditText naamInput;
     private int vragenCorrect;
+    private String soortOefening;
     private long maxid;
 
     @Nullable
@@ -68,11 +69,13 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
         // Design van de piechart vastzetten
         pieChartSettings();
 
-        // Score ophalen uit sharedpreferences
+        // de score en de soort oefening ophalen uit sharedpreferences
         Context context = getActivity();
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         vragenCorrect = settings.getInt("vragenCorrect", 0);
+        soortOefening = settings.getString("soortOefening", "None");
 
+        // start de score visualisatie
         setChartData(vragenCorrect);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -171,7 +174,7 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
                 else{
 
                     // De data
-                    scoreModel data = new scoreModel(naamInput.getText().toString(), "oef", Integer.toString(vragenCorrect));
+                    scoreModel data = new scoreModel(naamInput.getText().toString(), soortOefening, Integer.toString(vragenCorrect));
 
                     // upload score naar Firebase met auto increment
                     myRef.child(String.valueOf(maxid+1)).setValue(data);
