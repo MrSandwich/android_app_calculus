@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,31 +43,25 @@ public class ScoreFragment extends Fragment {
 
         scorelijst = v.findViewById(R.id.scorelijst);
 
-        /*scoreModels.add(new scoreModel("Lucy", "random oefening", "1"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Tom", "random oefening", "8"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Harry", "random oefening", "9"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Kees", "random oefening", "Baby Blue"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Tamara", "random oefening", "Baby Blue"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Demi", "random oefening", "Baby Blue"));             // DUMMY DATA
-        scoreModels.add(new scoreModel("Ford", "Thunderbird", "Baby Blue"));             // DUMMY DATA */
-
-        //mAdapter = new CourseListAdapter(getContext(), 0, scoreModels);
-        //scorelijst.setAdapter(mAdapter);
-
+        // Haal het aantal entries in de database op
         count();
+
+        //Wacht tot het aantal entries bekend zijn en haal alle data op
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateScoreList(maxid);
             }
-        }, 1000);
-
-
-
+        }, 2500);
 
         return v;
     }
     public void count (){
+
+        Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
+                "Data ophalen...", Snackbar.LENGTH_LONG);
+        snackBar.show();
+
         myRef = FirebaseDatabase.getInstance().getReference().child("scores");
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -73,11 +69,7 @@ public class ScoreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 maxid = (dataSnapshot.getChildrenCount());
-                Log.d("A heads up", "Het aantal database entries is: " +maxid);
-                Log.d("A heads up", "Het aantal database entries is: " +maxid);
-                Log.d("A heads up", "Het aantal database entries is: " +maxid);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -90,7 +82,7 @@ public class ScoreFragment extends Fragment {
         // controle of de database leeg is
         if (aantEntries != 0){
 
-            for (long i = 1; i < aantEntries; i++){
+            for (long i = 1; i < aantEntries+1; i++){
 
                 myRef = FirebaseDatabase.getInstance().getReference().child("scores").child(Long.toString(i));
 

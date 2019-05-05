@@ -179,6 +179,8 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
                     // upload score naar Firebase met auto increment
                     myRef.child(String.valueOf(maxid+1)).setValue(data);
 
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container, new StartFragment()).commit();
+
                 }
                 break;
         }
