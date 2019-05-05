@@ -7,4 +7,18 @@
     android:backgroundTintMode="src_over">
 
 
+    <Button
+        android:id="@+id/uploadtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Button" />
+    <Button
+        android:id="@+id/downloadtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadtest"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="Button" />
 </RelativeLayout>

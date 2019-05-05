@@ -26,9 +26,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.test.calculus.CourseListAdapter;
 import com.test.calculus.Database.DatabaseHelper;
 import com.test.calculus.Database.DatabaseInfo;
+import com.test.calculus.Models.scoreModel;
 import com.test.calculus.R;
 
 import java.util.ArrayList;
@@ -37,11 +43,15 @@ import java.util.List;
 public class OverzichtFragment extends Fragment implements View.OnClickListener {
 
     public static final String PREFS_NAME = "GedeeldeGegevens";
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("scores");
+
     private View v;
     private PieChart scoreChart;
     private Button uploadKnop;
     private EditText naamInput;
     private int vragenCorrect;
+    private long maxid;
 
     @Nullable
     @Override
@@ -64,6 +74,24 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
         vragenCorrect = settings.getInt("vragenCorrect", 0);
 
         setChartData(vragenCorrect);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // auto increment opstellen zodat scores niet overschreven worden
+                if (dataSnapshot.exists()){
+                    maxid = (dataSnapshot.getChildrenCount());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        // TODO to be removed --------------------------------------------------------------------------------------------------------->
         //addToDatabase();
         //getFromDatabase();
 
@@ -141,7 +169,13 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
                             .setAction("Action", null).show();
                 }
                 else{
-                    // todo check of er een internet connectie is. Zo ja upload de scores naar firebase. Anders update het lokaal
+
+                    // De data
+                    scoreModel data = new scoreModel(naamInput.getText().toString(), "oef", Integer.toString(vragenCorrect));
+
+                    // upload score naar Firebase met auto increment
+                    myRef.child(String.valueOf(maxid+1)).setValue(data);
+
                 }
                 break;
         }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "526944626803",
+    "firebase_url": "https://calculus-b42d5.firebaseio.com",
+    "project_id": "calculus-b42d5",
+    "storage_bucket": "calculus-b42d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526944626803:android:934a07050e83b256",
+        "android_client_info": {
+          "package_name": "com.test.calculus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526944626803-vhrf6iuas7juuugr4gqnap8khgde94oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.test.calculus",
+            "certificate_hash": "e3f8d437acde2e03180efcc0eb17174892ccabfa"
+          }
+        },
+        {
+          "client_id": "526944626803-64buo8udeth85t284rq91k74stb301kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDel0demx7GIx4-AXcOr0K6V2VL57PXjL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526944626803-64buo8udeth85t284rq91k74stb301kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

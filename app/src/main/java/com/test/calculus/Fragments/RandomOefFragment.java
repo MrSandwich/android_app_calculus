@@ -82,7 +82,7 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
     public void startVolgendeVraag (int beantwoordeVragen){
 
         // Controleer het aantal beantwoorde vragen
-        if (beantwoordeVragen < 1){
+        if (beantwoordeVragen < 0){
 
             countdownMusic.start();
 
