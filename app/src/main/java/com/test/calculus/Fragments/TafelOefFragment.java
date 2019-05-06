@@ -13,18 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.test.calculus.MediaControl;
 import com.test.calculus.R;
 import java.util.Random;
 
-
 public class TafelOefFragment extends Fragment implements View.OnClickListener {
 
+    // globale variabelen
     public static final String PREFS_NAME = "GedeeldeGegevens";
     final Handler handler = new Handler();
+
     MediaControl countdownMusic;
     MediaControl bongMusic;
+
     private View v;
     private int tafelnummer;
     private int productCijfer = 0;

@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import com.test.calculus.R;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
+    // globale variabelen
     public static final String PREFS_NAME = "GedeeldeGegevens";
 
     private View v;

@@ -1,9 +1,7 @@
 package com.test.calculus.Fragments;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,39 +9,32 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.test.calculus.CourseListAdapter;
-import com.test.calculus.Database.DatabaseHelper;
-import com.test.calculus.Database.DatabaseInfo;
 import com.test.calculus.Models.scoreModel;
 import com.test.calculus.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class OverzichtFragment extends Fragment implements View.OnClickListener {
 
+    // globale variabelen
+
     public static final String PREFS_NAME = "GedeeldeGegevens";
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("scores");
 
     private View v;
@@ -78,6 +69,7 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
         // start de score visualisatie
         setChartData(vragenCorrect);
 
+        // haal het aantal entries in de Firebase database op
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,11 +85,6 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
 
             }
         });
-
-        // TODO to be removed --------------------------------------------------------------------------------------------------------->
-        //addToDatabase();
-        //getFromDatabase();
-
         return v;
     }
     private void pieChartSettings(){
@@ -133,33 +120,10 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
 
         dataSet.setColors(colors);
         dataSet.setValueTextSize(20f);
-        //dataSet.setValueTextColor(000);
 
         PieData data = new PieData(dataSet);
         scoreChart.setData(data); // bind dataset aan chart.
         scoreChart.invalidate();  // Aanroepen van een redraw
-    }
-    private void addToDatabase(String naam, String soortOef, int score){
-        DatabaseHelper dbHelper = DatabaseHelper.getHelper(getContext());
-
-        ContentValues values = new ContentValues();
-        values.put(DatabaseInfo.Column.NAAM, naam);
-        values.put(DatabaseInfo.Column.OEFENING, soortOef);
-        values.put(DatabaseInfo.Column.SCORE, score);
-
-        dbHelper.insert(DatabaseInfo.Tables.SCORETABLE, null, values);
-    }
-    public void getFromDatabase(){
-
-        DatabaseHelper dbHelper = DatabaseHelper.getHelper(getContext());
-
-        Cursor rs = dbHelper.query(DatabaseInfo.Tables.SCORETABLE, new String[]{"*"}, null, null, null, null, null);
-
-        rs.moveToFirst();   // Skip : de lege elementen vooraan de rij.
-
-        String name = (String) rs.getString(rs.getColumnIndex("Naam"));
-
-        Log.d("Michiel deze gevonden=", "deze :"+name);
     }
     @Override
     public void onClick(View v) {

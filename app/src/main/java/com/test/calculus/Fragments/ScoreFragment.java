@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.test.calculus.CourseListAdapter;
 import com.test.calculus.Models.scoreModel;
 import com.test.calculus.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreFragment extends Fragment {
+    // globale variabelen
 
     final Handler handler = new Handler();
     private View v;
@@ -33,8 +33,7 @@ public class ScoreFragment extends Fragment {
     private CourseListAdapter mAdapter;
     private List<scoreModel> scoreModels = new ArrayList<>();
     private long maxid;
-
-    DatabaseReference myRef;
+    private DatabaseReference myRef;
 
     @Nullable
     @Override
@@ -56,11 +55,18 @@ public class ScoreFragment extends Fragment {
 
         return v;
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        // stop de timer wanneer de gebruiker het fragment verlaat, voorkom zo een null exception
+        handler.removeCallbacksAndMessages(null);
+    }
     public void count (){
 
-        Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
-                "Data ophalen...", Snackbar.LENGTH_LONG);
-        snackBar.show();
+        Toast toast = Toast.makeText(getContext(), "Data ophalen...", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 200);
+        toast.show();
+
 
         myRef = FirebaseDatabase.getInstance().getReference().child("scores");
 

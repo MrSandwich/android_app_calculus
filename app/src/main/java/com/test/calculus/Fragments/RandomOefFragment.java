@@ -14,15 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.test.calculus.MediaControl;
 import com.test.calculus.R;
-
 import java.util.Random;
 
 
 public class RandomOefFragment extends Fragment implements View.OnClickListener {
 
+    // globale variabelen
     public static final String PREFS_NAME = "GedeeldeGegevens";
     final Handler handler = new Handler();
 
@@ -31,8 +30,8 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
 
     private View v;
 
-    private int getal1;
-    private int getal2;
+    private int randomGetal1;
+    private int randomGetal2;
 
     private int beantwoordeVragen;
     private int vragenCorrect;
@@ -71,13 +70,6 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
         //vanaf onCreate eenmalig de nieuwe som opstarten
         startVolgendeVraag(0);
 
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-        Log.d("Heads up", "De waarde van wachttijd is nu: " + wachttijd);
-
         return v;
     }
     // Oefening annuleren wanneer men stopt
@@ -113,7 +105,7 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
             sommenMaker();
 
             // Genereer antwoord knoppen
-            stelAntwoordKnoppenIn(getal1, getal2);
+            stelAntwoordKnoppenIn(randomGetal1);
 
             // toon antwoorden wanneer men geen antwoord geeft binnen 5 seconden
             handler.postDelayed(new Runnable() {
@@ -167,16 +159,16 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
             if (antwoord != randomGetal1*randomGetal2){
 
                 // cijfers globaal maken
-                getal1 = randomGetal1;
-                getal2 = randomGetal2;
-                antwoord = getal1 * getal2;
+                this.randomGetal1 = randomGetal1;
+                this.randomGetal2 = randomGetal2;
+                antwoord = randomGetal1 * randomGetal2;
 
                 break;
             }
         }
-        getoondeSom.setText(""+getal1 +" x "+getal2);
+        getoondeSom.setText(""+randomGetal1 +" x "+randomGetal2);
     }
-    public void stelAntwoordKnoppenIn (int getal1, int getal2){
+    public void stelAntwoordKnoppenIn (int getal1){
 
         int foutAnt1;
         int foutAnt2;
@@ -207,7 +199,6 @@ public class RandomOefFragment extends Fragment implements View.OnClickListener 
                 break;
             }
         }
-
         // De correcte en foute antwoorden toewijzen aan willekeurige knoppen
 
         int volgorde = randomGenerator.nextInt(4)+1;

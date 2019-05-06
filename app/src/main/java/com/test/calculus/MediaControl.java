@@ -7,16 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MediaControl extends AppCompatActivity {
 
-    private Context context;
-    private int bestand;
+
     private boolean isLooped;
     private MediaPlayer music;
     private int length;
 
     public MediaControl (Context context, int bestand, boolean isLooped){
-        this.context = context;
-        this.bestand = bestand;
         this.isLooped = isLooped;
+
         music = MediaPlayer.create(context, bestand);
     }
 
