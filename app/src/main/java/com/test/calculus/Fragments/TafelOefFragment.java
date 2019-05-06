@@ -32,6 +32,8 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
     private int beantwoordeVragen;
     private boolean isRandom;
     private int vragenCorrect;
+    private int audioNummer;
+    private int wachttijd;
 
     private Button antwoordknop1;
     private Button antwoordknop2;
@@ -43,8 +45,6 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_oefeningen, container, false);
-        countdownMusic = new MediaControl(getContext(), R.raw.countdown_5, false);
-        bongMusic = new MediaControl(getContext(), R.raw.bong, false);
 
         // knop objecten ophalen
         antwoordknop1 = v.findViewById(R.id.antKnop1);
@@ -56,8 +56,12 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
         antwoordknop4 = v.findViewById(R.id.antKnop4);
         antwoordknop4.setOnClickListener(this);
 
-        // tafelnummer ophalen uit sharedpreferences
-        haalTafelnummerOp();
+        // tafelnummer & instellingen ophalen uit sharedpreferences
+        haalGegevensOp();
+
+        // Stel audio in
+        countdownMusic = new MediaControl(getContext(), audioNummer, false);
+        bongMusic = new MediaControl(getContext(), R.raw.bong, false);
 
         //vanaf onCreate eenmalig de nieuwe som opstarten
         startVolgendeVraag(0);
@@ -76,6 +80,16 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
         //Einde tonen
         handler.removeCallbacksAndMessages(null);
         onderbreekSpel();
+    }
+    public void haalGegevensOp(){
+
+        Context context = getActivity();
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        tafelnummer = settings.getInt("tafelnummer", 0);
+        isRandom = settings.getBoolean("switchState", false);
+        audioNummer = settings.getInt("audioNummer", 2131689474);
+        wachttijd = settings.getInt("wachttijd", 4000);
     }
 
     public void startVolgendeVraag (int beantwoordeVragen){
@@ -127,14 +141,6 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-    public void haalTafelnummerOp(){
-
-        Context context = getActivity();
-        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-        tafelnummer = settings.getInt("tafelnummer", 0);
-        isRandom = settings.getBoolean("switchState", false);
-    }
-
     public void sommenMaker(){
 
         TextView getoondeSom = v.findViewById(R.id.getoondeSom);
@@ -320,7 +326,7 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
                 bongMusic.reset();
                 startVolgendeVraag(beantwoordeVragen++);
             }
-        }, 4000);
+        }, wachttijd);
     }
     public void onderbreekSpel(){
 

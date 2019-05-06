@@ -7,12 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.test.calculus.MediaControl;
 import com.test.calculus.R;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
@@ -26,6 +28,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private Button setKnop;
     private EditText invoerTijd;
     private int input;
+    private MediaControl mediaplayer;
+    private MediaControl mediaplayer2;
+    private MediaControl mediaplayer3;
 
     @Nullable
     @Override
@@ -39,11 +44,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         setKnop = v.findViewById(R.id.setKnop);
         invoerTijd = v.findViewById(R.id.inputTijd);
 
+
         // listeners instellen
         audio1.setOnClickListener(this);
         audio2.setOnClickListener(this);
         audio3.setOnClickListener(this);
         setKnop.setOnClickListener(this);
+
+        mediaplayer = new MediaControl(getContext(), R.raw.countdown_5, false);
+        mediaplayer2 = new MediaControl(getContext(), R.raw.countdown_5_2, false);
+        mediaplayer3 = new MediaControl(getContext(), R.raw.countdown_5_3, false);
 
 
         return v;
@@ -51,16 +61,94 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        Context context = getActivity();
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
         switch (v.getId()) {
+
             case R.id.audio1:
 
+                // check of er geen andere audio speelt, zo ja, stop het
+                if (mediaplayer2.getLength() != 0){
+                    mediaplayer2.reset();
+                }
+                else if (mediaplayer3.getLength() != 0){
+                    mediaplayer3.reset();
+                }
+
+                // check of het gevraagde nummer al speelt, zo ja set stop, anders start
+                if (mediaplayer.getLength() != 0){
+                    mediaplayer.reset();
+                }
+                else {
+                    mediaplayer.start();
+
+                    // stel de gekozen audio in en stuur het door naar de oefeningfragmenten
+                    editor.putInt("audioNummer", R.raw.countdown_5);
+                    editor.commit();
+
+                    // toon feedback aan de gebruiker
+                    Snackbar.make(v, "Timer 1 ingesteld", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
                 break;
             case R.id.audio2:
 
+                // check of er geen andere audio speelt, zo ja, stop het
+                if (mediaplayer.getLength() != 0){
+                    mediaplayer.reset();
+                }
+                else if (mediaplayer3.getLength() != 0){
+                    mediaplayer3.reset();
+                }
+
+                // check of het gevraagde nummer al speelt, zo ja set stop, anders start
+                if (mediaplayer2.getLength() != 0){
+                    mediaplayer2.reset();
+                }
+                else {
+                    mediaplayer2.start();
+
+                    // stel de gekozen audio in en stuur het door naar de oefeningfragmenten
+
+                    editor.putInt("audioNummer", R.raw.countdown_5_2);
+                    editor.commit();
+
+                    // toon feedback aan de gebruiker
+                    Snackbar.make(v, "Timer 2 ingesteld", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
                 break;
             case R.id.audio3:
 
+                // check of er geen andere audio speelt, zo ja, stop het
+                if (mediaplayer.getLength() != 0){
+                    mediaplayer.reset();
+                }
+                else if (mediaplayer2.getLength() != 0){
+                    mediaplayer2.reset();
+                }
+
+                // check of het gevraagde nummer al speelt, zo ja set stop, anders start
+                if (mediaplayer3.getLength() != 0){
+                    mediaplayer3.reset();
+                }
+                else {
+                    mediaplayer3.start();
+
+                    // stel de gekozen audio in en stuur het door naar de oefeningfragmenten
+
+                    editor.putInt("audioNummer", R.raw.countdown_5_3);
+                    editor.commit();
+
+                    // toon feedback aan de gebruiker
+                    Snackbar.make(v, "Timer 3 ingesteld", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
                 break;
+
             case R.id.setKnop:
 
                 // error handling
@@ -75,11 +163,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 }
                 if (input >= 0 && input <= 10){
 
-                    Context context = getActivity();
-                    SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("wachttijd", input);
+                    // geef de wachttijd door aan de oefeningfragmenten
+
+                    editor.putInt("wachttijd", input*1000);
                     editor.commit();
+
+                    // toon feedback aan de gebruiker
+                    Snackbar.make(v, "De wachttijd is: " + input, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
 
                 }
 

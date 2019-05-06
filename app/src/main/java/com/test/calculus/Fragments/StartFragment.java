@@ -66,6 +66,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        int tafelnummer;
+
         switch (v.getId()) {
 
             case R.id.tafelOefening:
@@ -76,13 +78,14 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 Switch randomToggle = getView().findViewById(R.id.randomToggle);
 
                 //controleren of gebruiker een tafelnummer heeft opgegeven
-                int tafelnummer = 0;
+
                 try {
                     tafelnummer = Integer.parseInt(invoer.getText().toString());
                 }
                 catch (NumberFormatException e){
                     Snackbar.make(v, "Voer een geldig tafelnummer in", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    break;
                 }
                 if (tafelnummer > 0 && tafelnummer < 11){
 
