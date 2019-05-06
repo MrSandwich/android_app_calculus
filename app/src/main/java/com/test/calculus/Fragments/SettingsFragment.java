@@ -27,7 +27,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private Button audio3;
     private Button setKnop;
     private EditText invoerTijd;
-    private int input;
+
     private MediaControl mediaplayer;
     private MediaControl mediaplayer2;
     private MediaControl mediaplayer3;
@@ -57,6 +57,21 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
 
         return v;
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // stop de muziek
+        if (mediaplayer.getLength() != 0){
+            mediaplayer.reset();
+        }
+        if (mediaplayer2.getLength() != 0){
+            mediaplayer2.reset();
+        }
+        if (mediaplayer3.getLength() != 0){
+            mediaplayer3.reset();
+        }
     }
 
     @Override
@@ -150,7 +165,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.setKnop:
-
+                int input;
                 // error handling
                 try{
                     input = Integer.parseInt(invoerTijd.getText().toString());
@@ -159,6 +174,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
                     Snackbar.make(v, "Voer eerst een nummer in", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    break;
 
                 }
                 if (input >= 0 && input <= 10){
@@ -169,7 +185,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                     editor.commit();
 
                     // toon feedback aan de gebruiker
-                    Snackbar.make(v, "De wachttijd is: " + input, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(v, "De wachttijd is: " + input + " seconden", Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
 
                 }
