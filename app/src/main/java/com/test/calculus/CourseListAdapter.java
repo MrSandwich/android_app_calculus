@@ -41,7 +41,7 @@ public class CourseListAdapter extends ArrayAdapter<scoreModel> {
         // Uit de Array model informatie ophalen
         vh.naam.setText((CharSequence) cm.getNaam());
         vh.soortOef.setText((CharSequence) cm.getSoortOef());
-        vh.score.setText((CharSequence) cm.getScore());
+        vh.score.setText("10/" +(CharSequence) cm.getScore());
         return convertView;
     }
 

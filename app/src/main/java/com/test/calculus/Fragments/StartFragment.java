@@ -99,7 +99,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                     getFragmentManager().beginTransaction().replace(R.id.frame_container, new TafelOefFragment()).commit();
 
                 }
-                else if (tafelnummer > 10){
+                else if (tafelnummer > 10 || tafelnummer == 0){
                     Snackbar.make(v, "Selecteer een tafelnummer tussen de 1 en 10", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }

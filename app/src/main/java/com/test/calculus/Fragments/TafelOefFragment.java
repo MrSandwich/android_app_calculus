@@ -317,6 +317,7 @@ public class TafelOefFragment extends Fragment implements View.OnClickListener {
                 antwoordknop3.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#D5D6D6")));
                 antwoordknop4.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#D5D6D6")));
 
+                bongMusic.reset();
                 startVolgendeVraag(beantwoordeVragen++);
             }
         }, 4000);

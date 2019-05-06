@@ -6,4 +6,102 @@
     android:backgroundTint="#CCFFFFFF"
     android:backgroundTintMode="src_over">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Muziek "
+        android:layout_above="@id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="1dp"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stel een aftel muziekje in"
+        android:layout_above="@id/audio1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/audio1"
+        android:layout_width="133dp"
+        android:layout_height="75dp"
+        android:layout_above="@id/audio2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="#C1000000"
+        android:text="Timer 1"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/audio2"
+        android:layout_width="133dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#C1000000"
+        android:text="Timer 2"
+        android:textColor="#FFFFFF" />
+    <Button
+        android:id="@+id/audio3"
+        android:layout_width="133dp"
+        android:layout_height="75dp"
+        android:backgroundTint="#C1000000"
+        android:text="Timer 3"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/audio2"
+        android:layout_marginTop="35dp"/>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Algemeen"
+        android:layout_below="@+id/audio3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wachttijd tussen vragen"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/inputTijd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:maxLength="1"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:inputType="number"
+        android:hint="4" />
+
+    <Button
+        android:id="@+id/setKnop"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#C1000000"
+        android:text="Ok"
+        android:textColor="#FFFFFF"
+        android:layout_toRightOf="@+id/inputTijd"
+        android:layout_below="@+id/textView3"/>
+
+
 </RelativeLayout>
