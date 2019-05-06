@@ -91,9 +91,10 @@ public class OverzichtFragment extends Fragment implements View.OnClickListener 
 
         scoreChart = v.findViewById(R.id.chart);
         Description d = new Description();
-        d.setText("Aantal behaalde punten");
+        d.setText("Aantal beantwoordde vragen");
         d.setTextColor(Color.rgb(255,255,255));
-        d.setTextSize(16f);
+        d.setTextSize(18f);
+        d.setYOffset(5f);
         scoreChart.setDescription(d);
         scoreChart.setBackgroundColor(000);
         scoreChart.setHoleColor(000);
